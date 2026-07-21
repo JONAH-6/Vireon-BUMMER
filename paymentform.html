@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover" />
+    <title>Activate Vireon • Pay Registration Fee</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== ROOT – Dark Blue + Black (same as dashboard) ===== */
+        :root {
+            --primary: #005f80;
+            --primary-dark: #003d52;
+            --primary-glow: rgba(0, 95, 128, 0.3);
+            --primary-dim: rgba(0, 95, 128, 0.12);
+            --bg-body: #080d12;
+            --bg-card: rgba(6, 14, 20, 0.92);
+            --border-subtle: rgba(0, 95, 128, 0.2);
+            --text-dim: rgba(255, 255, 255, 0.5);
+            --text-soft: rgba(255, 255, 255, 0.85);
+            --radius-lg: 20px;
+            --radius-md: 16px;
+            --radius-sm: 12px;
+            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.7);
+            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.8);
+            --transition: 0.25s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--bg-body);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 16px;
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ── Dark ambient orbs ── */
+        body::before,
+        body::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(80px);
+            opacity: 0.15;
+        }
+        body::before {
+            width: 350px;
+            height: 350px;
+            background: var(--primary);
+            top: -100px;
+            left: -80px;
+            animation: floatOrb 10s ease-in-out infinite;
+        }
+        body::after {
+            width: 300px;
+            height: 300px;
+            background: var(--primary-dark);
+            bottom: -80px;
+            right: -60px;
+            animation: floatOrb 12s ease-in-out infinite reverse;
+        }
+
+        @keyframes floatOrb {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(40px, -25px) scale(1.1);
+            }
+            50% {
+                transform: translate(-20px, -40px) scale(0.95);
+            }
+            75% {
+                transform: translate(-30px, 20px) scale(1.05);
+            }
+        }
+
+        .container {
+            max-width: 460px;
+            width: 100%;
+            background: var(--bg-card);
+            backdrop-filter: blur(14px);
+            border-radius: 28px;
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            position: relative;
+            z-index: 1;
+            transition: var(--transition);
+        }
+
+        .container:hover {
+            box-shadow: var(--shadow-md), 0 0 0 2px rgba(0, 95, 128, 0.15) inset;
+        }
+
+        /* ── Animated border ── */
+        .container::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 30px;
+            padding: 2px;
+            background: linear-gradient(45deg, var(--primary-dark), var(--primary), var(--primary-dark), var(--primary));
+            background-size: 300% 300%;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+            animation: borderRotate 5s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes borderRotate {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .header {
+            padding: 22px 24px 18px;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .header h2 span {
+            color: var(--primary);
+        }
+
+        .cancel-icon {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.3rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .cancel-icon:hover {
+            color: #ffffff;
+            transform: rotate(90deg);
+        }
+
+        .content {
+            padding: 20px 24px 28px;
+        }
+
+        .bank-info {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            padding: 18px 16px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-row .label {
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+
+        .info-row .value {
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .account-name-bold {
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: #ffffff;
+            background: var(--primary-dim);
+            padding: 3px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 95, 128, 0.2);
+        }
+
+        .copy-btn-small {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+        }
+
+        .copy-btn-small:hover {
+            background: #0088cc;
+            transform: scale(1.04);
+        }
+
+        .accounts-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-soft);
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
+        }
+
+        .account-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 14px 18px;
+            border-radius: 16px;
+            margin-bottom: 14px;
+            border: 1px solid var(--border-subtle);
+            transition: var(--transition);
+        }
+
+        .account-item:hover {
+            border-color: var(--primary);
+            background: rgba(0, 95, 128, 0.06);
+        }
+
+        .account-number {
+            font-size: 1.1rem;
+            font-weight: 800;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            color: var(--primary);
+        }
+
+        .copy-btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 5px 16px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+        }
+
+        .copy-btn:hover {
+            background: #0088cc;
+            transform: scale(1.04);
+        }
+
+        .amount-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 16px 18px;
+            border-radius: 16px;
+            margin: 20px 0 24px;
+            border: 1px solid var(--border-subtle);
+            transition: var(--transition);
+        }
+
+        .amount-row:hover {
+            border-color: var(--primary);
+        }
+
+        .amount-label {
+            font-weight: 600;
+            color: var(--text-soft);
+        }
+
+        .amount-value {
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-shadow: 0 0 20px rgba(0, 95, 128, 0.2);
+        }
+
+        .telegram-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--primary);
+            color: #fff;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 14px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .telegram-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transform: translateX(-100%);
+            transition: 0.6s ease;
+        }
+
+        .telegram-btn:hover::after {
+            transform: translateX(100%);
+        }
+
+        .telegram-btn:hover {
+            background: #0088cc;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 95, 128, 0.4);
+        }
+
+        .help-text {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-bottom: 16px;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 18px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .back-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .back-link a:hover {
+            color: #ffffff;
+            gap: 12px;
+        }
+
+        .back-link a i {
+            transition: var(--transition);
+        }
+
+        .back-link a:hover i {
+            transform: translateX(-4px);
+        }
+
+        hr {
+            margin: 14px 0;
+            border-color: var(--border-subtle);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            body {
+                padding: 12px;
+            }
+            .header h2 {
+                font-size: 1.1rem;
+            }
+            .header {
+                padding: 18px 18px 14px;
+            }
+            .content {
+                padding: 16px 18px 22px;
+            }
+            .account-number {
+                font-size: 0.95rem;
+            }
+            .amount-value {
+                font-size: 1.3rem;
+            }
+            .telegram-btn {
+                font-size: 0.85rem;
+                padding: 12px;
+            }
+            .bank-info {
+                padding: 14px 12px;
+            }
+            .account-item {
+                padding: 12px 14px;
+            }
+            .info-row {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .info-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .info-row .value {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .account-item {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .amount-row {
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Complete <span>Fee</span> Payment</h2>
+            <a href="dashbord.html" class="cancel-icon"><i class="fas fa-times"></i></a>
+        </div>
+
+        <div class="content">
+            <!-- Bank Info -->
+            <div class="bank-info">
+                <div class="info-row">
+                    <span class="label">Account Name</span>
+                    <span class="value">
+                        <strong class="account-name-bold">Baobabmicrofi</strong>
+                        <button class="copy-btn-small" data-copy="Baobabmicrofi">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Bank Name</span>
+                    <span class="value">
+                        <strong class="account-name-bold">Paystack - Titan</strong>
+                        <button class="copy-btn-small" data-copy="Paystack - Titan">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </span>
+                </div>
+            </div>
+
+            <div class="accounts-title">
+                <i class="fas fa-university" style="color: var(--primary); margin-right: 6px;"></i>
+                Account number for payment
+            </div>
+
+            <div class="account-item">
+                <span class="account-number">9731984987</span>
+                <button class="copy-btn" data-copy="9731984987">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+
+            <div class="amount-row">
+                <span class="amount-label"><i class="fas fa-naira-sign" style="color: var(--primary); margin-right: 4px;"></i> Amount to Pay</span>
+                <span class="amount-value" id="amountToPay">₦14,500</span>
+            </div>
+
+            <!-- Telegram Confirm -->
+            <a href="https://t.me/Africa_coach" class="telegram-btn" target="_blank">
+                <i class="fab fa-telegram-plane"></i> Confirm on Telegram
+            </a>
+
+            <div class="help-text">After transfer, click above to send your receipt / screenshot</div>
+
+            <hr />
+            <div class="back-link">
+                <a href="dashbord.html"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load plan price from Vireon localStorage
+        const userData = JSON.parse(localStorage.getItem('vireonUserData'));
+        if (userData && userData.planPrice) {
+            const amount = parseInt(userData.planPrice);
+            document.getElementById('amountToPay').textContent = `₦${amount.toLocaleString()}`;
+        }
+
+        // Copy functionality
+        document.querySelectorAll('.copy-btn, .copy-btn-small').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const textToCopy = this.getAttribute('data-copy');
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    const originalHTML = this.innerHTML;
+                    const originalBg = this.style.background;
+                    const originalColor = this.style.color;
+                    this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    this.style.background = '#003d52';
+                    this.style.color = '#fff';
+                    this.style.borderColor = '#005f80';
+                    setTimeout(() => {
+                        this.innerHTML = originalHTML;
+                        this.style.background = originalBg || '';
+                        this.style.color = originalColor || '';
+                        this.style.borderColor = '';
+                    }, 1800);
+                }).catch(() => {
+                    alert(`Please copy manually: ${textToCopy}`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

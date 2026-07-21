@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>VIREON – Complete Your Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== ROOT – Dark Blue + Black (same as dashboard) ===== */
+        :root {
+            --primary: #005f80;
+            --primary-dark: #003d52;
+            --primary-glow: rgba(0, 95, 128, 0.3);
+            --primary-dim: rgba(0, 95, 128, 0.12);
+            --bg-body: #080d12;
+            --bg-card: rgba(6, 14, 20, 0.92);
+            --border-subtle: rgba(0, 95, 128, 0.2);
+            --text-dim: rgba(255, 255, 255, 0.5);
+            --text-soft: rgba(255, 255, 255, 0.85);
+            --radius-lg: 20px;
+            --radius-md: 16px;
+            --radius-sm: 12px;
+            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.7);
+            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.8);
+            --shadow-glow: 0 0 30px rgba(0, 95, 128, 0.08);
+            --transition: 0.25s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--bg-body);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ── Dark ambient orbs ── */
+        body::before,
+        body::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(80px);
+            opacity: 0.2;
+        }
+        body::before {
+            width: 350px;
+            height: 350px;
+            background: var(--primary);
+            top: -100px;
+            left: -80px;
+            animation: floatOrb 10s ease-in-out infinite;
+        }
+        body::after {
+            width: 300px;
+            height: 300px;
+            background: var(--primary-dark);
+            bottom: -80px;
+            right: -60px;
+            animation: floatOrb 12s ease-in-out infinite reverse;
+        }
+
+        @keyframes floatOrb {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(40px, -25px) scale(1.1);
+            }
+            50% {
+                transform: translate(-20px, -40px) scale(0.95);
+            }
+            75% {
+                transform: translate(-30px, 20px) scale(1.05);
+            }
+        }
+
+        /* ── Container ── */
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 32px;
+            padding: 25px 32px;
+            box-shadow: var(--shadow-md), 0 0 0 1px rgba(0, 95, 128, 0.1) inset;
+            position: relative;
+            z-index: 1;
+            transition: var(--transition);
+        }
+
+        .container:hover {
+            box-shadow: var(--shadow-md), 0 0 0 2px rgba(0, 95, 128, 0.2) inset;
+        }
+
+        /* ── Animated border ── */
+        .container::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 34px;
+            padding: 2px;
+            background: linear-gradient(45deg, var(--primary-dark), var(--primary), var(--primary-dark), var(--primary));
+            background-size: 300% 300%;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+            animation: borderRotate 5s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes borderRotate {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* ── Header ── */
+        .form-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .form-header h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+        .form-header h1 span {
+            color: var(--primary);
+        }
+        .form-header p {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        /* ── Form Elements ── */
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-subtle);
+            color: #ffffff;
+            font-size: 0.95rem;
+            border-radius: 20px;
+            transition: var(--transition);
+            outline: none;
+            font-weight: 500;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        select {
+            color: #ffffff;
+            background: rgba(0, 0, 0, 0.5);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23005f80' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 12px;
+        }
+
+        select option {
+            background: #0a141c;
+            color: #fff;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--primary);
+            background: rgba(0, 95, 128, 0.15);
+            box-shadow: 0 0 20px rgba(0, 95, 128, 0.15);
+            transform: scale(1.01);
+        }
+
+        /* ── Plan Options ── */
+        .plan-options {
+            margin-top: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .plan-option {
+            background: rgba(0, 0, 0, 0.55);
+            border: 1px solid var(--border-subtle);
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            border-radius: 24px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .plan-option:hover {
+            border-color: var(--primary);
+            background: rgba(0, 95, 128, 0.08);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .plan-option.selected {
+            border-color: var(--primary);
+            background: rgba(0, 95, 128, 0.15);
+            box-shadow: 0 0 30px rgba(0, 95, 128, 0.1);
+        }
+
+        .plan-option.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.3rem;
+            text-shadow: 0 0 12px rgba(0, 95, 128, 0.3);
+        }
+
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .plan-name {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .plan-name i {
+            color: var(--primary);
+        }
+
+        .plan-price {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .recommended-badge {
+            background: var(--primary-dark);
+            color: #fff;
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 2px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(0, 95, 128, 0.2);
+        }
+
+        .plan-features {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 0.72rem;
+            color: var(--text-soft);
+            font-weight: 500;
+        }
+
+        .plan-features span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(0, 95, 128, 0.08);
+            padding: 3px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
+            border: 1px solid rgba(0, 95, 128, 0.06);
+        }
+
+        .plan-features i {
+            color: var(--primary);
+            font-size: 0.7rem;
+        }
+
+        /* ── Submit Button ── */
+        .btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: #ffffff;
+            padding: 14px;
+            font-weight: 700;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            border-radius: 40px;
+            margin-top: 24px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: 0 8px 25px rgba(0, 95, 128, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transform: translateX(-100%);
+            transition: 0.6s ease;
+        }
+
+        .btn:hover::after {
+            transform: translateX(100%);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 95, 128, 0.35);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        }
+
+        .btn i {
+            color: #ffffff;
+            transition: var(--transition);
+        }
+
+        .btn:hover i {
+            transform: translateX(4px);
+        }
+
+        /* ── Back Link ── */
+        .back-link {
+            text-align: center;
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .back-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .back-link a:hover {
+            color: #ffffff;
+            gap: 12px;
+        }
+
+        .back-link a i {
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .back-link a:hover i {
+            color: #ffffff;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            body {
+                padding: 12px;
+            }
+            .container {
+                padding: 20px 16px;
+                border-radius: 24px;
+            }
+            .form-header {
+                margin-bottom: 24px;
+            }
+            .form-header h1 {
+                font-size: 1.3rem;
+            }
+            .form-header p {
+                font-size: 0.78rem;
+            }
+            input,
+            select {
+                padding: 12px 14px;
+                font-size: 0.9rem;
+            }
+            .plan-option {
+                padding: 14px 16px;
+            }
+            .plan-option.selected::after {
+                right: 14px;
+                font-size: 1rem;
+            }
+            .plan-name {
+                font-size: 0.9rem;
+            }
+            .plan-price {
+                font-size: 1rem;
+            }
+            .plan-features {
+                gap: 8px;
+                font-size: 0.68rem;
+            }
+            .plan-features span {
+                padding: 2px 8px;
+            }
+            .btn {
+                padding: 12px;
+                font-size: 0.95rem;
+                margin-top: 20px;
+            }
+            .back-link {
+                margin-top: 22px;
+                padding-top: 16px;
+            }
+            .back-link a {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .plan-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+            .plan-features span {
+                font-size: 0.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-header">
+            <h1>Join <span>Vireon</span></h1>
+            <p>Complete registration to unlock your earning dashboard</p>
+        </div>
+
+        <form id="registrationForm">
+            <div class="form-group">
+                <input type="text" id="fullName" placeholder="Full Name" required>
+            </div>
+            <div class="form-group">
+                <input type="tel" id="phoneNumber" placeholder="Phone Number" required>
+            </div>
+            <div class="form-group">
+                <input type="email" id="email" placeholder="Email Address" required>
+            </div>
+            <div class="form-group">
+                <select id="country" required>
+                    <option value="" disabled selected>Select Country</option>
+                    <option value="nigeria">Nigeria</option>
+                    <option value="ghana">Ghana</option>
+                    <option value="south-africa">South Africa</option>
+                    <option value="kenya">Kenya</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <p style="color: var(--text-soft); margin-bottom: 10px; font-weight: 600; font-size: 15px; letter-spacing: 0.3px;">
+                    <i class="fas fa-crown" style="color: var(--primary); margin-right: 6px;"></i> Choose Your Plan
+                </p>
+                <div class="plan-options">
+                    <!-- Onboarding Plan (14,500) -->
+                    <div class="plan-option selected" data-plan="onboarding" data-price="14500">
+                        <div class="plan-header">
+                            <span class="plan-name"><i class="fas fa-check-circle"></i> Vireon Onboarding <span class="recommended-badge">Most Popular</span></span>
+                            <span class="plan-price">₦14,500</span>
+                        </div>
+                        <div class="plan-features">
+                            <span><i class="fas fa-check"></i> All modules</span>
+                            <span><i class="fas fa-chart-line"></i> Daily earnings</span>
+                            <span><i class="fas fa-hand-holding-usd"></i> Loan & EasyOwn</span>
+                        </div>
+                    </div>
+                    <!-- Premium Plus Plan – updated to ₦19,500 -->
+                    <div class="plan-option" data-plan="premium-plus" data-price="19500">
+                        <div class="plan-header">
+                            <span class="plan-name"><i class="fas fa-crown"></i> Vireon Premium Plus</span>
+                            <span class="plan-price">₦19,500</span>
+                        </div>
+                        <div class="plan-features">
+                            <span><i class="fas fa-star"></i> VIP perks</span>
+                            <span><i class="fas fa-rocket"></i> x15 boosts</span>
+                            <span><i class="fas fa-hand-holding-usd"></i> Loan & EasyOwn</span>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" id="selectedPlan" value="onboarding">
+                <input type="hidden" id="selectedPlanPrice" value="14500">
+            </div>
+
+            <button type="submit" class="btn">Proceed to Dashboard <i class="fas fa-arrow-right"></i></button>
+        </form>
+
+        <div class="back-link">
+            <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const planOptions = document.querySelectorAll('.plan-option');
+            const selectedPlanInput = document.getElementById('selectedPlan');
+            const selectedPlanPriceInput = document.getElementById('selectedPlanPrice');
+
+            function selectPlan(selectedElement) {
+                planOptions.forEach(option => option.classList.remove('selected'));
+                selectedElement.classList.add('selected');
+                selectedPlanInput.value = selectedElement.getAttribute('data-plan');
+                selectedPlanPriceInput.value = selectedElement.getAttribute('data-price');
+            }
+
+            planOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    selectPlan(this);
+                });
+            });
+
+            // Initial sync
+            const currentSelected = document.querySelector('.plan-option.selected');
+            if (currentSelected) {
+                selectedPlanInput.value = currentSelected.getAttribute('data-plan');
+                selectedPlanPriceInput.value = currentSelected.getAttribute('data-price');
+            }
+        });
+
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fullName = document.getElementById('fullName').value.trim();
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const country = document.getElementById('country').value;
+            const selectedPlan = document.getElementById('selectedPlan').value;
+            const selectedPlanPrice = document.getElementById('selectedPlanPrice').value;
+
+            if (!fullName || !phoneNumber || !email || !country) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            if (phoneNumber.length < 10) {
+                alert('Please enter a valid phone number.');
+                return;
+            }
+            const emailRegex = /^[^\s]+@[^\s]+\.[^\s]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            const userData = {
+                fullName,
+                phoneNumber,
+                email,
+                country,
+                plan: selectedPlan,
+                planPrice: selectedPlanPrice,
+                registeredAt: new Date().toISOString()
+            };
+            localStorage.setItem('vireonUserData', JSON.stringify(userData));
+            window.location.href = 'dashbord.html';
+        });
+    </script>
+</body>
+</html>

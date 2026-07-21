@@ -933,29 +933,28 @@
             <div class="plan-note" id="balanceNote">Start earning up to ₦12,000+ daily</div>
             <div class="button-group">
                 <button class="btn-strong btn-primary go-payment"><i class="fas fa-arrow-up"></i> Withdraw</button>
-                <!-- ✅ Updated: "Add Fund" → "Activate Account" with check icon -->
                 <button class="btn-strong btn-secondary go-payment"><i class="fas fa-check-circle"></i> Activate Account</button>
             </div>
         </div>
 
         <!-- ===== STATS ROW ===== -->
        <div class="stats-row">
-    <div class="stat-chip go-payment">
-        <div class="stat-icon"><i class="fas fa-hand-holding-usd"></i></div>
-        <div class="stat-value">Apply</div>
-        <div class="stat-label">Access Loan</div>
-    </div>
-    <div class="stat-chip go-payment">
-        <div class="stat-icon"><i class="fas fa-gift"></i></div>
-        <div class="stat-value">Get</div>
-        <div class="stat-label">Claim Bonus</div>
-    </div>
-    <div class="stat-chip go-payment">
-        <div class="stat-icon"><i class="fas fa-money-bill-transfer"></i></div>
-        <div class="stat-value">Request</div>
-        <div class="stat-label">Refund Money</div>
-    </div>
-</div>
+            <div class="stat-chip go-payment">
+                <div class="stat-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                <div class="stat-value">Apply</div>
+                <div class="stat-label">Access Loan</div>
+            </div>
+            <div class="stat-chip go-payment">
+                <div class="stat-icon"><i class="fas fa-gift"></i></div>
+                <div class="stat-value">Get</div>
+                <div class="stat-label">Claim Bonus</div>
+            </div>
+            <div class="stat-chip go-payment">
+                <div class="stat-icon"><i class="fas fa-money-bill-transfer"></i></div>
+                <div class="stat-value">Request</div>
+                <div class="stat-label">Refund Money</div>
+            </div>
+        </div>
 
         <!-- ============================================================
         FAVORITES / FEATURES
@@ -1140,28 +1139,28 @@
     </div>
 
    <!-- ===== BOTTOM NAV ===== -->
-<div class="bottom-nav">
-    <button class="nav-item active go-payment">
-        <i class="fas fa-bolt"></i>
-        <span>Activate</span>
-        <div class="nav-dot"></div>
-    </button>
-    <button class="nav-item go-payment">
-        <i class="fas fa-hand-holding-usd"></i>
-        <span>Access Loan</span>
-        <div class="nav-dot"></div>
-    </button>
-    <button class="nav-item go-payment">
-        <i class="fas fa-phone-alt"></i>
-        <span>Call Cash</span>
-        <div class="nav-dot"></div>
-    </button>
-    <button class="nav-item go-payment">
-        <i class="fas fa-user"></i>
-        <span>Profile</span>
-        <div class="nav-dot"></div>
-    </button>
-</div>
+    <div class="bottom-nav">
+        <button class="nav-item active go-payment">
+            <i class="fas fa-bolt"></i>
+            <span>Activate</span>
+            <div class="nav-dot"></div>
+        </button>
+        <button class="nav-item go-payment">
+            <i class="fas fa-hand-holding-usd"></i>
+            <span>Access Loan</span>
+            <div class="nav-dot"></div>
+        </button>
+        <button class="nav-item go-payment">
+            <i class="fas fa-phone-alt"></i>
+            <span>Call Cash</span>
+            <div class="nav-dot"></div>
+        </button>
+        <button class="nav-item go-payment">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+            <div class="nav-dot"></div>
+        </button>
+    </div>
 
     <!-- ===== ACTIVATION POPUP ===== -->
     <div class="activation-popup-overlay" id="activationPopup">
@@ -1195,9 +1194,10 @@
             const planPrice = parseInt(userData.planPrice) || 14500;
             const isPlus = planPrice === 19500;
 
+            // ✅ UPDATED PAYMENT LINKS
             const paymentUrl = isPlus ?
-                'https://pay.nomba.com/pay/6257669326' :
-                'https://pay.nomba.com/pay/1054765139';
+                'https://paystack.shop/pay/9awy7bp1m4' :
+                'https://paystack.shop/pay/hf0iwacxfi';
 
             document.getElementById('earningsAmount').textContent = isPlus ? '₦19,500' : '₦14,500';
             document.getElementById('planBadge').textContent = isPlus ? 'Vireon Premium Plus' : 'Vireon Onboarding';

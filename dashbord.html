@@ -7,26 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
-        /* ===== ROOT – Dark Blue + Black ===== */
-        :root {
-            --primary: #005f80;
-            --primary-dark: #003d52;
-            --primary-glow: rgba(0, 95, 128, 0.3);
-            --primary-dim: rgba(0, 95, 128, 0.12);
-            --bg-body: #080d12;
-            --bg-card: rgba(6, 14, 20, 0.92);
-            --border-subtle: rgba(0, 95, 128, 0.2);
-            --text-dim: rgba(255, 255, 255, 0.5);
-            --text-soft: rgba(255, 255, 255, 0.85);
-            --radius-lg: 20px;
-            --radius-md: 16px;
-            --radius-sm: 12px;
-            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.7);
-            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.8);
-            --shadow-glow: 0 0 30px rgba(0, 95, 128, 0.08);
-            --transition: 0.25s ease;
-        }
-
+        /* ===== TEAL/CYAN THEME – exactly like the registration page ===== */
         * {
             margin: 0;
             padding: 0;
@@ -34,32 +15,99 @@
         }
 
         body {
-            background: var(--bg-body);
-            color: #fff;
+            background: radial-gradient(circle at 20% 30%, #0c9ab8, #085f75);
+            color: #ffffff;
             font-family: 'Inter', system-ui, sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             -webkit-font-smoothing: antialiased;
+            animation: bgShift 10s infinite alternate;
+            overflow-x: hidden;
+        }
+
+        @keyframes bgShift {
+            0% {
+                background-size: 100% 100%;
+                background-position: 0% 0%;
+            }
+            100% {
+                background-size: 150% 150%;
+                background-position: 100% 100%;
+            }
+        }
+
+        body::before,
+        body::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(60px);
+            opacity: 0.3;
+        }
+        body::before {
+            width: 300px;
+            height: 300px;
+            background: #00668D;
+            top: -80px;
+            left: -60px;
+            animation: floatOrb 8s ease-in-out infinite;
+        }
+        body::after {
+            width: 250px;
+            height: 250px;
+            background: #66ccff;
+            bottom: -70px;
+            right: -50px;
+            animation: floatOrb 10s ease-in-out infinite reverse;
+        }
+        @keyframes floatOrb {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(30px, -20px) scale(1.1);
+            }
+            50% {
+                transform: translate(-15px, -35px) scale(0.95);
+            }
+            75% {
+                transform: translate(-25px, 15px) scale(1.05);
+            }
         }
 
         .dashboard-container {
-            max-width: 820px;
+            max-width: 800px;
             margin: 0 auto;
             width: 100%;
             min-height: 100vh;
             padding-bottom: 90px;
+            position: relative;
+            z-index: 1;
         }
 
-        ::-webkit-scrollbar {
-            width: 4px;
+        /* ── Glass Cards ── */
+        .glass {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 102, 141, 0.4);
+            border-radius: 32px;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(102, 204, 255, 0.15) inset;
+            animation: containerPulse 3s ease-in-out infinite;
         }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 10px;
+
+        @keyframes containerPulse {
+            0%,
+            100% {
+                box-shadow: 0 20px 35px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(102, 204, 255, 0.15) inset;
+            }
+            50% {
+                box-shadow: 0 25px 45px rgba(0, 102, 141, 0.3), 0 0 0 2px rgba(102, 204, 255, 0.25) inset;
+            }
         }
 
         /* ── Top Bar ── */
@@ -69,21 +117,25 @@
             justify-content: space-between;
             align-items: center;
         }
+
         .top-bar .greeting {
             font-size: 1.3rem;
             font-weight: 700;
             color: #ffffff;
         }
+
         .top-bar .sub {
             font-size: 0.8rem;
-            color: var(--text-dim);
+            color: rgba(255, 255, 255, 0.65);
             margin-top: 3px;
         }
+
         .top-bar-right {
             display: flex;
             align-items: center;
             gap: 14px;
         }
+
         .notification-btn {
             position: relative;
             background: transparent;
@@ -92,33 +144,36 @@
             font-size: 1.3rem;
             cursor: pointer;
             padding: 6px;
-            transition: var(--transition);
+            transition: 0.2s ease;
         }
+
         .notification-btn:hover {
-            color: var(--primary);
+            color: #66ccff;
             transform: scale(1.05);
         }
+
         .notification-badge {
             position: absolute;
             top: 0px;
             right: 0px;
             width: 18px;
             height: 18px;
-            background: var(--primary-dark);
-            color: #fff;
-            font-size: 0.65rem;
+            background: #00668D;
+            color: #ffffff;
+            font-size: 0.7rem;
             font-weight: 700;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid var(--bg-body);
+            border: 2px solid #0b1c26;
             line-height: 1;
         }
+
         .avatar {
             width: 44px;
             height: 44px;
-            background: linear-gradient(135deg, #003d52, var(--primary));
+            background: linear-gradient(135deg, #00668D, #66ccff);
             color: #fff;
             font-weight: 700;
             font-size: 1rem;
@@ -126,63 +181,64 @@
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            box-shadow: var(--shadow-sm);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             flex-shrink: 0;
-            border: 2px solid rgba(0, 95, 128, 0.3);
+            border: 2px solid rgba(255,255,255,0.15);
         }
+
         .notification-dropdown {
             position: absolute;
             top: 75px;
             right: 12px;
             width: 280px;
-            background: rgba(6, 14, 20, 0.96);
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(16px);
-            border: 1px solid var(--border-subtle);
+            border: 1px solid rgba(0, 102, 141, 0.4);
             border-radius: 18px;
             padding: 20px 18px;
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.5);
             z-index: 1500;
             display: none;
             animation: fadeDown 0.2s ease;
             text-align: left;
         }
+
         .notification-dropdown.show {
             display: block;
         }
+
         @keyframes fadeDown {
-            from {
-                opacity: 0;
-                transform: translateY(-8px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+
         .notification-dropdown .notif-item {
             display: flex;
             align-items: flex-start;
             gap: 10px;
             margin-bottom: 14px;
             padding-bottom: 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
             font-size: 0.85rem;
-            color: var(--text-soft);
+            color: rgba(255, 255, 255, 0.85);
             line-height: 1.4;
         }
+
         .notification-dropdown .notif-item:last-of-type {
             border-bottom: none;
             margin-bottom: 16px;
         }
+
         .notification-dropdown .notif-item i {
-            color: var(--primary);
+            color: #66ccff;
             font-size: 1rem;
             margin-top: 2px;
         }
+
         .notification-dropdown .btn-notif-activate {
             display: block;
             width: 100%;
-            background: var(--primary-dark);
+            background: #00668D;
             color: #fff;
             border: none;
             padding: 11px;
@@ -190,71 +246,68 @@
             font-size: 0.85rem;
             border-radius: 30px;
             cursor: pointer;
-            transition: var(--transition);
+            transition: 0.2s;
             font-family: 'Inter', sans-serif;
             text-align: center;
-            box-shadow: 0 4px 14px rgba(0, 95, 128, 0.2);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.3);
         }
+
         .notification-dropdown .btn-notif-activate:hover {
-            background: #004d66;
-            box-shadow: 0 6px 20px rgba(0, 95, 128, 0.3);
+            background: #0088cc;
         }
 
         /* ── Plan Card ── */
         .plan-card {
             margin: 16px 20px 22px;
-            background: var(--bg-card);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
             padding: 22px 20px 24px;
-            box-shadow: var(--shadow-sm);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 102, 141, 0.4);
+            border-radius: 32px;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(102, 204, 255, 0.15) inset;
             position: relative;
             overflow: hidden;
         }
-        .plan-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(0, 95, 128, 0.06) 0%, transparent 70%);
-            pointer-events: none;
-        }
+
         .plan-card .plan-label {
             font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: rgba(255, 255, 255, 0.35);
+            color: rgba(255,255,255,0.5);
             margin-bottom: 5px;
         }
+
         .plan-card .plan-badge {
             display: inline-block;
-            background: var(--primary-dim);
-            border: 1px solid rgba(0, 95, 128, 0.25);
+            background: rgba(0, 102, 141, 0.3);
+            border: 1px solid rgba(102,204,255,0.3);
             border-radius: 20px;
             padding: 4px 14px;
             font-size: 0.72rem;
             font-weight: 600;
-            color: var(--primary);
+            color: #66ccff;
             margin-bottom: 10px;
         }
+
         .plan-card .plan-price {
             font-size: 1.6rem;
             font-weight: 800;
             color: #ffffff;
             margin-bottom: 6px;
         }
+
         .plan-card .plan-note {
             font-size: 0.8rem;
-            color: var(--text-dim);
+            color: rgba(255, 255, 255, 0.65);
             margin-bottom: 20px;
         }
+
+        /* ── Buttons ── */
         .plan-card .button-group {
             display: flex;
             gap: 12px;
         }
+
         .plan-card .btn-strong {
             flex: 1;
             padding: 13px 10px;
@@ -262,7 +315,7 @@
             font-size: 0.9rem;
             border-radius: 30px;
             cursor: pointer;
-            transition: var(--transition);
+            transition: 0.2s;
             border: none;
             display: flex;
             align-items: center;
@@ -270,23 +323,25 @@
             gap: 8px;
             font-family: 'Inter', sans-serif;
         }
+
         .plan-card .btn-primary {
-            background: var(--primary-dark);
+            background: #00668D;
             color: #fff;
-            box-shadow: 0 4px 14px rgba(0, 95, 128, 0.2);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
+
         .plan-card .btn-primary:hover {
-            background: #004d66;
-            transform: scale(1.02);
-            box-shadow: 0 6px 20px rgba(0, 95, 128, 0.3);
+            background: #0088cc;
         }
+
         .plan-card .btn-secondary {
             background: transparent;
-            color: var(--primary);
-            border: 1px solid var(--primary);
+            color: #66ccff;
+            border: 1px solid #66ccff;
         }
+
         .plan-card .btn-secondary:hover {
-            background: var(--primary-dim);
+            background: rgba(0,102,141,0.15);
         }
 
         /* ── Stats Row ── */
@@ -296,35 +351,38 @@
             gap: 10px;
             margin: 0 20px 22px;
         }
+
         .stat-chip {
-            background: var(--bg-card);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(8px);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-sm);
+            border: 1px solid rgba(0, 102, 141, 0.4);
+            border-radius: 16px;
             padding: 15px 8px;
             text-align: center;
             cursor: pointer;
-            transition: var(--transition);
-            box-shadow: var(--shadow-sm);
+            transition: 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
+
         .stat-chip:hover {
-            border-color: var(--primary);
-            background: var(--primary-dim);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+            border-color: #66ccff;
+            background: rgba(0,102,141,0.15);
         }
+
         .stat-chip .stat-icon {
             font-size: 1.2rem;
-            color: var(--primary);
+            color: #66ccff;
             margin-bottom: 7px;
         }
+
         .stat-chip .stat-value {
             font-weight: 700;
             font-size: 1.1rem;
         }
+
         .stat-chip .stat-label {
             font-size: 0.62rem;
-            color: var(--text-dim);
+            color: rgba(255, 255, 255, 0.65);
             text-transform: uppercase;
             letter-spacing: 0.6px;
             margin-top: 3px;
@@ -338,26 +396,23 @@
             padding: 0 20px;
             margin-bottom: 12px;
         }
+
         .section-header h3 {
             font-size: 1rem;
             font-weight: 700;
             color: #fff;
-            letter-spacing: 0.3px;
         }
+
         .section-header .more {
             font-size: 0.76rem;
-            color: var(--primary);
+            color: #66ccff;
             cursor: pointer;
             font-weight: 600;
-            transition: var(--transition);
-        }
-        .section-header .more:hover {
-            opacity: 0.7;
         }
 
         /* ============================================================
-                   FAVORITES / FEATURES – circular icons with blue glow
-                   ============================================================ */
+           FAVORITES / FEATURES – circular icons with teal glow
+           ============================================================ */
         .favorites-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -382,7 +437,7 @@
             justify-content: center;
             text-align: center;
             cursor: pointer;
-            transition: var(--transition);
+            transition: 0.2s;
             background: transparent;
             border: none;
             padding: 6px 0;
@@ -392,57 +447,49 @@
             width: 68px;
             height: 68px;
             border-radius: 50%;
-            background: rgba(0, 95, 128, 0.08);
-            border: 1.5px solid rgba(0, 95, 128, 0.2);
+            background: rgba(102, 204, 255, 0.08);
+            border: 1.5px solid rgba(102, 204, 255, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.6rem;
-            color: var(--primary);
-            transition: var(--transition);
-            box-shadow: 0 0 12px rgba(0, 95, 128, 0.05);
+            color: #66ccff;
+            transition: 0.2s;
+            box-shadow: 0 0 12px rgba(102, 204, 255, 0.05);
             margin-bottom: 8px;
             position: relative;
         }
-        .fav-item .fav-circle::after {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: 50%;
-            border: 1.5px solid transparent;
-            transition: var(--transition);
-        }
         .fav-item:hover .fav-circle {
-            border-color: var(--primary);
-            box-shadow: 0 0 28px rgba(0, 95, 128, 0.2), inset 0 0 28px rgba(0, 95, 128, 0.05);
+            border-color: #66ccff;
+            box-shadow: 0 0 28px rgba(102, 204, 255, 0.2), inset 0 0 28px rgba(102, 204, 255, 0.05);
             transform: scale(1.04);
-            background: rgba(0, 95, 128, 0.14);
+            background: rgba(102, 204, 255, 0.14);
         }
         .fav-item .fav-label {
             font-size: 0.7rem;
             font-weight: 600;
-            color: var(--text-soft);
+            color: rgba(255, 255, 255, 0.85);
             letter-spacing: 0.2px;
             line-height: 1.2;
         }
         .fav-item .fav-label small {
             display: block;
             font-weight: 400;
-            color: var(--text-dim);
+            color: rgba(255, 255, 255, 0.65);
             font-size: 0.6rem;
         }
 
         /* ============================================================
-                   CALL HISTORY
-                   ============================================================ */
+           CALL HISTORY
+           ============================================================ */
         .call-history-list {
             margin: 0 20px 22px;
-            background: var(--bg-card);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(8px);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-md);
+            border: 1px solid rgba(0, 102, 141, 0.4);
+            border-radius: 16px;
             padding: 6px 4px;
-            box-shadow: var(--shadow-sm);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
         .call-history-item {
             display: flex;
@@ -450,14 +497,14 @@
             justify-content: space-between;
             padding: 14px 16px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-            transition: var(--transition);
+            transition: 0.2s;
             border-radius: 8px;
         }
         .call-history-item:last-child {
             border-bottom: none;
         }
         .call-history-item:hover {
-            background: rgba(0, 95, 128, 0.06);
+            background: rgba(102, 204, 255, 0.06);
         }
         .call-history-item .ch-left {
             display: flex;
@@ -468,14 +515,14 @@
             width: 42px;
             height: 42px;
             border-radius: 50%;
-            background: var(--primary-dim);
+            background: rgba(102, 204, 255, 0.12);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
             font-size: 0.85rem;
-            color: var(--primary);
-            border: 1px solid rgba(0, 95, 128, 0.15);
+            color: #66ccff;
+            border: 1px solid rgba(102, 204, 255, 0.15);
             flex-shrink: 0;
         }
         .call-history-item .ch-info .ch-name {
@@ -485,7 +532,7 @@
         }
         .call-history-item .ch-info .ch-meta {
             font-size: 0.7rem;
-            color: var(--text-dim);
+            color: rgba(255, 255, 255, 0.65);
             display: flex;
             gap: 10px;
             margin-top: 2px;
@@ -496,16 +543,16 @@
         .call-history-item .ch-earnings {
             font-weight: 700;
             font-size: 1rem;
-            color: var(--primary);
-            background: var(--primary-dim);
+            color: #66ccff;
+            background: rgba(102, 204, 255, 0.12);
             padding: 4px 14px;
             border-radius: 20px;
-            border: 1px solid rgba(0, 95, 128, 0.12);
+            border: 1px solid rgba(102, 204, 255, 0.12);
         }
 
         /* ============================================================
-                   CALL CASH / PHONEBOOK
-                   ============================================================ */
+           CALL CASH / PHONEBOOK
+           ============================================================ */
         .phonebook-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -513,20 +560,19 @@
             margin: 0 20px 22px;
         }
         .phonebook-card {
-            background: var(--bg-card);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(8px);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-sm);
+            border: 1px solid rgba(0, 102, 141, 0.4);
+            border-radius: 16px;
             padding: 16px 14px 18px;
-            transition: var(--transition);
-            box-shadow: var(--shadow-sm);
+            transition: 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: column;
         }
         .phonebook-card:hover {
-            border-color: var(--primary);
-            background: rgba(0, 95, 128, 0.06);
-            box-shadow: var(--shadow-md);
+            border-color: #66ccff;
+            background: rgba(102, 204, 255, 0.06);
         }
         .phonebook-card .pb-top {
             display: flex;
@@ -542,20 +588,20 @@
         .phonebook-card .pb-status {
             font-size: 0.6rem;
             font-weight: 600;
-            color: var(--primary);
-            background: var(--primary-dim);
+            color: #66ccff;
+            background: rgba(102, 204, 255, 0.12);
             padding: 2px 12px;
             border-radius: 12px;
-            border: 1px solid rgba(0, 95, 128, 0.12);
+            border: 1px solid rgba(102, 204, 255, 0.12);
         }
         .phonebook-card .pb-source {
             font-size: 0.7rem;
-            color: var(--text-dim);
+            color: rgba(255, 255, 255, 0.65);
             margin-bottom: 10px;
         }
         .phonebook-card .pb-source i {
             margin-right: 4px;
-            color: var(--primary);
+            color: #66ccff;
         }
         .phonebook-card .pb-bottom {
             display: flex;
@@ -566,32 +612,32 @@
         .phonebook-card .pb-rate {
             font-size: 0.75rem;
             font-weight: 600;
-            color: var(--text-dim);
+            color: rgba(255, 255, 255, 0.65);
         }
         .phonebook-card .pb-rate strong {
-            color: var(--primary);
+            color: #66ccff;
             font-weight: 700;
         }
         .phonebook-card .pb-call-btn {
-            background: var(--primary-dim);
-            border: 1px solid rgba(0, 95, 128, 0.2);
-            color: var(--primary);
+            background: rgba(102, 204, 255, 0.1);
+            border: 1px solid rgba(102, 204, 255, 0.2);
+            color: #66ccff;
             padding: 6px 18px;
             border-radius: 20px;
             font-weight: 700;
             font-size: 0.75rem;
             cursor: pointer;
-            transition: var(--transition);
+            transition: 0.2s;
             font-family: 'Inter', sans-serif;
             display: flex;
             align-items: center;
             gap: 6px;
         }
         .phonebook-card .pb-call-btn:hover {
-            background: var(--primary-dark);
+            background: #00668D;
             color: #fff;
-            border-color: var(--primary-dark);
-            box-shadow: 0 4px 14px rgba(0, 95, 128, 0.2);
+            border-color: #00668D;
+            box-shadow: 0 4px 14px rgba(0, 102, 141, 0.2);
         }
 
         /* ── Quick Links ── */
@@ -599,54 +645,57 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
-            margin: 0 20px 18px;
+            margin: 0 20px 22px;
         }
+
         .quick-link-item {
-            background: var(--bg-card);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(8px);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-sm);
-            padding: 12px 4px 11px;
+            border: 1px solid rgba(0, 102, 141, 0.4);
+            border-radius: 16px;
+            padding: 14px 4px 13px;
             text-align: center;
             cursor: pointer;
-            transition: var(--transition);
+            transition: 0.2s;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 5px;
-            min-height: 64px;
-            box-shadow: var(--shadow-sm);
+            gap: 6px;
+            min-height: 70px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
+
         .quick-link-item:hover {
-            border-color: var(--primary);
-            background: var(--primary-dim);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+            border-color: #66ccff;
+            background: rgba(0,102,141,0.12);
         }
+
         .quick-link-item .link-icon {
-            font-size: 1.1rem;
-            color: var(--primary);
+            font-size: 1.2rem;
+            color: #66ccff;
         }
+
         .quick-link-item span {
-            font-size: 0.6rem;
-            color: var(--text-soft);
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.85);
             font-weight: 500;
         }
 
         /* ── Stream Banner ── */
         .stream-banner {
             margin: 0 20px 28px;
-            background: var(--bg-card);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(12px);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
+            border: 1px solid rgba(0, 102, 141, 0.4);
+            border-radius: 32px;
             padding: 20px 20px 18px;
-            box-shadow: var(--shadow-sm);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.4);
         }
+
         .stream-banner .boost-tag {
             display: inline-block;
-            background: var(--primary-dark);
+            background: #00668D;
             color: #fff;
             font-size: 0.65rem;
             font-weight: 800;
@@ -654,36 +703,38 @@
             border-radius: 14px;
             margin-bottom: 10px;
             text-transform: uppercase;
-            box-shadow: 0 4px 10px rgba(0, 95, 128, 0.15);
         }
+
         .stream-banner h4 {
             font-size: 1.05rem;
             font-weight: 700;
             margin-bottom: 5px;
         }
+
         .stream-banner p {
             font-size: 0.78rem;
-            color: var(--text-dim);
+            color: rgba(255, 255, 255, 0.65);
             margin-bottom: 16px;
         }
+
         .stream-banner .join-btn {
             width: 100%;
             background: transparent;
-            border: 1px solid var(--primary);
-            color: var(--primary);
+            border: 1px solid #66ccff;
+            color: #66ccff;
             padding: 12px;
             font-weight: 700;
             font-size: 0.85rem;
             border-radius: 30px;
             cursor: pointer;
-            transition: var(--transition);
+            transition: 0.2s;
             font-family: 'Inter', sans-serif;
         }
+
         .stream-banner .join-btn:hover {
-            background: var(--primary-dark);
+            background: #00668D;
             color: #fff;
-            border-color: var(--primary-dark);
-            box-shadow: 0 4px 14px rgba(0, 95, 128, 0.2);
+            border-color: #00668D;
         }
 
         /* ── Bottom Nav ── */
@@ -693,20 +744,20 @@
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
-            max-width: 820px;
+            max-width: 800px;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            background: rgba(4, 10, 14, 0.96);
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(20px);
-            border-top: 1px solid var(--border-subtle);
+            border-top: 1px solid rgba(0, 102, 141, 0.4);
             z-index: 1000;
             padding: 8px 0 10px;
-            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.5);
         }
+
         .nav-item {
             background: none;
             border: none;
-            color: var(--text-dim);
+            color: rgba(255, 255, 255, 0.65);
             font-size: 0.62rem;
             cursor: pointer;
             display: flex;
@@ -718,34 +769,35 @@
             font-family: 'Inter', sans-serif;
             min-height: 52px;
             position: relative;
-            transition: var(--transition);
+            transition: 0.2s;
         }
+
         .nav-item i {
             font-size: 1.1rem;
         }
+
         .nav-item.active {
-            color: var(--primary);
+            color: #66ccff;
         }
+
         .nav-item .nav-dot {
             width: 5px;
             height: 5px;
-            background: var(--primary);
+            background: #66ccff;
             border-radius: 50%;
             opacity: 0;
             position: absolute;
             bottom: 2px;
             left: 50%;
             transform: translateX(-50%);
-            transition: var(--transition);
+            transition: 0.2s;
         }
+
         .nav-item.active .nav-dot {
             opacity: 1;
         }
-        .nav-item:hover {
-            color: var(--primary);
-        }
 
-        /* ── Activation Popup ── */
+        /* ── Generic Activation Popup (Bonus) ── */
         .activation-popup-overlay {
             display: none;
             position: fixed;
@@ -753,51 +805,51 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0,0,0,0.8);
             backdrop-filter: blur(8px);
             z-index: 2000;
             align-items: center;
             justify-content: center;
             padding: 20px;
         }
+
         .activation-popup-content {
-            background: #0a141c;
-            border: 1px solid var(--primary);
+            background: #0e1f28;
+            border: 1px solid #66ccff;
             border-radius: 24px;
             padding: 32px 24px 26px;
             text-align: center;
             width: 100%;
             max-width: 360px;
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 30px 50px rgba(0,0,0,0.7);
             animation: popupFadeIn 0.3s ease;
         }
+
         @keyframes popupFadeIn {
-            from {
-                transform: scale(0.95);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
+
         .popup-icon {
             font-size: 2.5rem;
-            color: var(--primary);
+            color: #66ccff;
             margin-bottom: 14px;
         }
+
         .popup-message {
             font-size: 1.2rem;
             font-weight: 700;
             margin-bottom: 22px;
             line-height: 1.5;
         }
+
         .popup-amount {
-            color: var(--primary);
+            color: #1cc749;
             font-weight: 800;
         }
+
         .popup-btn {
-            background: var(--primary-dark);
+            background: #00668D;
             color: #fff;
             border: none;
             padding: 13px 30px;
@@ -805,101 +857,41 @@
             font-size: 0.9rem;
             border-radius: 30px;
             cursor: pointer;
-            transition: var(--transition);
+            transition: 0.2s;
             font-family: 'Inter', sans-serif;
-            box-shadow: 0 4px 14px rgba(0, 95, 128, 0.2);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.4);
         }
+
         .popup-btn:hover {
-            background: #004d66;
-            transform: scale(1.02);
-            box-shadow: 0 6px 20px rgba(0, 95, 128, 0.3);
+            background: #0088cc;
         }
 
         /* ── Responsive ── */
         @media (max-width: 600px) {
-            .plan-card {
-                padding: 18px 16px 20px;
-            }
-            .favorites-grid {
-                gap: 8px;
-            }
-            .favorites-grid-buy {
-                gap: 8px;
-            }
-            .fav-item .fav-circle {
-                width: 58px;
-                height: 58px;
-                font-size: 1.3rem;
-            }
-            .fav-item .fav-label {
-                font-size: 0.6rem;
-            }
-            .phonebook-grid {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-            .call-history-item {
-                padding: 12px 12px;
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-            .call-history-item .ch-earnings {
-                font-size: 0.85rem;
-                padding: 3px 12px;
-            }
-            .quick-links-grid {
-                gap: 6px;
-            }
-            .quick-link-item {
-                padding: 10px 2px 9px;
-                min-height: 56px;
-            }
-            .quick-link-item .link-icon {
-                font-size: 0.95rem;
-            }
-            .stats-row {
-                gap: 6px;
-            }
-            .stat-chip {
-                padding: 12px 6px;
-            }
-            .stat-chip .stat-value {
-                font-size: 0.95rem;
-            }
-            .phonebook-card .pb-call-btn {
-                padding: 5px 14px;
-                font-size: 0.7rem;
-            }
-            .bottom-nav {
-                padding: 6px 0 8px;
-            }
+            .plan-card { padding: 18px 16px 20px; }
+            .quick-links-grid { gap: 8px; }
+            .quick-link-item { padding: 12px 2px 11px; }
+            .stats-row { gap: 8px; }
+            .favorites-grid { gap: 8px; }
+            .favorites-grid-buy { gap: 8px; }
+            .fav-item .fav-circle { width: 58px; height: 58px; font-size: 1.3rem; }
+            .fav-item .fav-label { font-size: 0.6rem; }
+            .phonebook-grid { grid-template-columns: 1fr; gap: 10px; }
+            .call-history-item { padding: 12px 12px; flex-wrap: wrap; gap: 8px; }
+            .call-history-item .ch-earnings { font-size: 0.85rem; padding: 3px 12px; }
         }
         @media (max-width: 420px) {
-            .favorites-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 4px;
-            }
-            .fav-item .fav-circle {
-                width: 50px;
-                height: 50px;
-                font-size: 1.1rem;
-            }
-            .fav-item .fav-label {
-                font-size: 0.55rem;
-            }
-            .top-bar .greeting {
-                font-size: 1.1rem;
-            }
-            .plan-card .plan-price {
-                font-size: 1.3rem;
-            }
+            .favorites-grid { grid-template-columns: repeat(4, 1fr); gap: 4px; }
+            .fav-item .fav-circle { width: 50px; height: 50px; font-size: 1.1rem; }
+            .fav-item .fav-label { font-size: 0.55rem; }
+            .top-bar .greeting { font-size: 1.1rem; }
+            .plan-card .plan-price { font-size: 1.3rem; }
         }
     </style>
 </head>
 <body>
     <div class="dashboard-container">
-
-        <!-- ===== TOP BAR ===== -->
+        <!-- Top Bar -->
         <div class="top-bar">
             <div>
                 <div class="greeting" id="welcomeName">Hi!</div>
@@ -921,24 +913,25 @@
                     <i class="fas fa-gift"></i>
                     <span id="notifWelcome">Welcome! Activate your account to receive your bonus.</span>
                 </div>
-                <button class="btn-notif-activate" id="notifActivateBtn">Activate Now</button>
+                <button class="btn-notif-activate activate-trigger" id="notifActivateBtn">Activate Now</button>
             </div>
         </div>
 
-        <!-- ===== PLAN CARD ===== -->
+        <!-- Plan Card -->
         <div class="plan-card">
             <div class="plan-label">YOUR PLAN</div>
             <div class="plan-badge" id="planBadge">Vireon Onboarding</div>
             <div class="plan-price" id="earningsAmount">₦14,500</div>
             <div class="plan-note" id="balanceNote">Start earning up to ₦12,000+ daily</div>
+
             <div class="button-group">
                 <button class="btn-strong btn-primary go-payment"><i class="fas fa-arrow-up"></i> Withdraw</button>
-                <button class="btn-strong btn-secondary go-payment"><i class="fas fa-check-circle"></i> Activate Account</button>
+                <button class="btn-strong btn-secondary activate-trigger" id="activateAccountBtn"><i class="fas fa-check-circle"></i> Activate Account</button>
             </div>
         </div>
 
-        <!-- ===== STATS ROW ===== -->
-       <div class="stats-row">
+        <!-- Stats Row -->
+        <div class="stats-row">
             <div class="stat-chip go-payment">
                 <div class="stat-icon"><i class="fas fa-hand-holding-usd"></i></div>
                 <div class="stat-value">Apply</div>
@@ -960,7 +953,7 @@
         FAVORITES / FEATURES
         ============================================================ -->
         <div class="section-header">
-            <h3><i class="fas fa-star" style="color: var(--primary); margin-right: 6px;"></i> Favorites</h3>
+            <h3><i class="fas fa-star" style="color: #66ccff; margin-right: 6px;"></i> Favorites</h3>
             <span class="more go-payment">More <i class="fas fa-chevron-right"></i></span>
         </div>
 
@@ -996,7 +989,7 @@
         CALL HISTORY
         ============================================================ -->
         <div class="section-header">
-            <h3><i class="fas fa-clock" style="color: var(--primary); margin-right: 6px;"></i> Call History</h3>
+            <h3><i class="fas fa-clock" style="color: #66ccff; margin-right: 6px;"></i> Call History</h3>
             <span class="more go-payment">View All <i class="fas fa-chevron-right"></i></span>
         </div>
 
@@ -1059,7 +1052,7 @@
         CALL CASH / PHONEBOOK
         ============================================================ -->
         <div class="section-header">
-            <h3><i class="fas fa-address-book" style="color: var(--primary); margin-right: 6px;"></i> Call Cash</h3>
+            <h3><i class="fas fa-address-book" style="color: #66ccff; margin-right: 6px;"></i> Call Cash</h3>
             <span class="more go-payment">See All <i class="fas fa-chevron-right"></i></span>
         </div>
 
@@ -1110,11 +1103,9 @@
             </div>
         </div>
 
-        <!-- ============================================================
-        QUICK LINKS
-        ============================================================ -->
+        <!-- Quick Links -->
         <div class="section-header">
-            <h3><i class="fas fa-th-large" style="color: var(--primary); margin-right: 6px;"></i> Quick Links</h3>
+            <h3>Quick Links</h3>
             <span class="more go-payment">More <i class="fas fa-chevron-right"></i></span>
         </div>
         <div class="quick-links-grid">
@@ -1128,41 +1119,24 @@
             <div class="quick-link-item go-payment"><div class="link-icon"><i class="fas fa-graduation-cap"></i></div><span>Academy</span></div>
         </div>
 
-        <!-- ===== STREAM BANNER ===== -->
+        <!-- Stream Banner -->
         <div class="stream-banner">
             <div class="boost-tag" id="boostBadge">x10 BOOST</div>
             <h4>Join. Stream. Earn.</h4>
             <p id="streamMessage">Join Livestreams on TikTok for x10 boost — paid in ₦</p>
-            <button class="join-btn go-payment"><i class="fas fa-play-circle"></i> Join Vireon Stream</button>
+            <button class="join-btn go-payment">Join Vireon Stream</button>
         </div>
-
     </div>
 
-   <!-- ===== BOTTOM NAV ===== -->
+    <!-- Bottom Nav -->
     <div class="bottom-nav">
-        <button class="nav-item active go-payment">
-            <i class="fas fa-bolt"></i>
-            <span>Activate</span>
-            <div class="nav-dot"></div>
-        </button>
-        <button class="nav-item go-payment">
-            <i class="fas fa-hand-holding-usd"></i>
-            <span>Access Loan</span>
-            <div class="nav-dot"></div>
-        </button>
-        <button class="nav-item go-payment">
-            <i class="fas fa-phone-alt"></i>
-            <span>Call Cash</span>
-            <div class="nav-dot"></div>
-        </button>
-        <button class="nav-item go-payment">
-            <i class="fas fa-user"></i>
-            <span>Profile</span>
-            <div class="nav-dot"></div>
-        </button>
+        <button class="nav-item active activate-trigger" id="navActivate"><i class="fas fa-bolt"></i><span>Activate</span><div class="nav-dot"></div></button>
+        <button class="nav-item go-payment"><i class="fas fa-hand-holding-usd"></i><span>Access Loan</span><div class="nav-dot"></div></button>
+        <button class="nav-item go-payment"><i class="fas fa-phone-alt"></i><span>Call Cash</span><div class="nav-dot"></div></button>
+        <button class="nav-item go-payment"><i class="fas fa-user"></i><span>Profile</span><div class="nav-dot"></div></button>
     </div>
 
-    <!-- ===== ACTIVATION POPUP ===== -->
+    <!-- Generic Activation Popup (for non-activation actions) -->
     <div class="activation-popup-overlay" id="activationPopup">
         <div class="activation-popup-content">
             <div class="popup-icon"><i class="fas fa-gift"></i></div>
@@ -1174,7 +1148,7 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const userData = JSON.parse(localStorage.getItem('vireonUserData'));
             if (!userData) {
                 alert('Please complete registration first');
@@ -1194,11 +1168,6 @@
             const planPrice = parseInt(userData.planPrice) || 14500;
             const isPlus = planPrice === 19500;
 
-            // ✅ UPDATED PAYMENT LINKS
-            const paymentUrl = isPlus ?
-                'https://paystack.shop/pay/9awy7bp1m4' :
-                'https://paystack.shop/pay/hf0iwacxfi';
-
             document.getElementById('earningsAmount').textContent = isPlus ? '₦19,500' : '₦14,500';
             document.getElementById('planBadge').textContent = isPlus ? 'Vireon Premium Plus' : 'Vireon Onboarding';
             document.getElementById('balanceNote').textContent = isPlus ?
@@ -1213,49 +1182,63 @@
             document.getElementById('popupMessage').innerHTML =
                 `Activate Your Account to<br>Access Your <span class="popup-amount">${bonusAmount}</span> Bonus`;
 
+            // ── Notification dropdown ──
             const notifBtn = document.getElementById('notificationBtn');
             const notifDropdown = document.getElementById('notificationDropdown');
-            const notifActivateBtn = document.getElementById('notifActivateBtn');
 
-            notifBtn.addEventListener('click', function(e) {
+            notifBtn.addEventListener('click', function (e) {
                 e.stopPropagation();
                 notifDropdown.classList.toggle('show');
             });
 
-            document.addEventListener('click', function(e) {
+            document.addEventListener('click', function (e) {
                 if (!notifDropdown.contains(e.target) && e.target !== notifBtn) {
                     notifDropdown.classList.remove('show');
                 }
             });
 
-            notifActivateBtn.addEventListener('click', function() {
-                notifDropdown.classList.remove('show');
-                window.open(paymentUrl, '_blank');
-            });
+            // ── Popup references ──
+            const activationPopup = document.getElementById('activationPopup');
 
-            function goToPayment() {
-                window.open(paymentUrl, '_blank');
+            // ── Functions to show/hide ──
+            function showActivationPopup() {
+                activationPopup.style.display = 'flex';
             }
 
-            const popup = document.getElementById('activationPopup');
-            const okBtn = document.getElementById('popupOkBtn');
-
-            function showPopup(e) {
-                e.preventDefault();
-                popup.style.display = 'flex';
-            }
-
-            document.querySelectorAll('.go-payment').forEach(el => {
-                el.addEventListener('click', showPopup);
+            // ── Activation triggers: directly go to payment page ──
+            document.querySelectorAll('.activate-trigger').forEach(el => {
+                el.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    // Close notification dropdown if open
+                    notifDropdown.classList.remove('show');
+                    window.location.href = 'paymentform.html';
+                });
             });
 
-            okBtn.addEventListener('click', function() {
-                popup.style.display = 'none';
-                goToPayment();
+            // ── Non-activation triggers: show the bonus activation popup ──
+            document.querySelectorAll('.go-payment:not(.activate-trigger)').forEach(el => {
+                el.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    showActivationPopup();
+                });
             });
 
+            // The popup OK button redirects to payment as well
+            document.getElementById('popupOkBtn').addEventListener('click', function () {
+                activationPopup.style.display = 'none';
+                window.location.href = 'paymentform.html';
+            });
+
+            // ── Close popups when clicking outside ──
+            window.addEventListener('click', function (e) {
+                if (e.target === activationPopup) {
+                    activationPopup.style.display = 'none';
+                }
+            });
+
+            // ── Bottom nav active state ──
             document.querySelectorAll('.nav-item').forEach(btn =>
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', function () {
                     document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                 })

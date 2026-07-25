@@ -8,23 +8,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ===== ROOT – Dark Blue + Black (same as dashboard) ===== */
+        /* ===== TEAL/CYAN THEME – exactly like the registration page ===== */
         :root {
-            --primary: #005f80;
-            --primary-dark: #003d52;
-            --primary-glow: rgba(0, 95, 128, 0.3);
-            --primary-dim: rgba(0, 95, 128, 0.12);
-            --bg-body: #080d12;
-            --bg-card: rgba(6, 14, 20, 0.92);
-            --border-subtle: rgba(0, 95, 128, 0.2);
-            --text-dim: rgba(255, 255, 255, 0.5);
+            --primary: #66ccff;
+            --primary-dark: #00668D;
+            --primary-glow: rgba(102, 204, 255, 0.25);
+            --primary-dim: rgba(102, 204, 255, 0.12);
+            --bg-body: #0b1c26;
+            --bg-card: rgba(10, 25, 35, 0.75);
+            --border-subtle: rgba(102, 204, 255, 0.15);
+            --text-dim: rgba(255, 255, 255, 0.65);
             --text-soft: rgba(255, 255, 255, 0.85);
             --radius-lg: 20px;
             --radius-md: 16px;
             --radius-sm: 12px;
-            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.7);
-            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.8);
-            --shadow-glow: 0 0 30px rgba(0, 95, 128, 0.08);
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.4);
+            --shadow-glow: 0 0 30px rgba(102, 204, 255, 0.08);
             --transition: 0.25s ease;
         }
 
@@ -41,7 +41,7 @@
         }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-body);
+            background: radial-gradient(circle at 20% 30%, #0c9ab8, #085f75);
             color: #ffffff;
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
@@ -69,7 +69,7 @@
             justify-content: space-between;
             padding: 6px 12px;
             background-color: #000000;
-            border-bottom: 2px solid var(--primary);
+            border-bottom: 2px solid var(--primary-dark);
             box-shadow: var(--shadow-sm);
             gap: 8px;
             height: 48px;
@@ -89,7 +89,7 @@
             width: 7px;
             height: 7px;
             border-radius: 50%;
-            background-color: var(--primary);
+            background-color: var(--primary-dark);
             flex-shrink: 0;
         }
         .navbar .btn-start {
@@ -98,11 +98,11 @@
             gap: 5px;
             padding: 6px 12px;
             border-radius: 9999px;
-            background-color: var(--primary);
+            background-color: var(--primary-dark);
             color: #ffffff;
             font-size: clamp(0.65rem, 1.6vw, 0.8rem);
             font-weight: 600;
-            box-shadow: 0 6px 18px rgba(0, 95, 128, 0.35);
+            box-shadow: 0 6px 18px rgba(0, 102, 141, 0.35);
             transition: all 0.3s ease;
             white-space: nowrap;
             flex-shrink: 0;
@@ -165,7 +165,7 @@
             border-radius: 50%;
             z-index: 0;
             pointer-events: none;
-            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(102, 204, 255, 0.35) 0%, transparent 70%);
         }
         .hero::before {
             top: -80px;
@@ -179,7 +179,7 @@
             right: -40px;
             width: 240px;
             height: 240px;
-            background: radial-gradient(circle, rgba(0, 95, 128, 0.2) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(0, 102, 141, 0.25) 0%, transparent 70%);
             animation: heroOrbFloat 10s ease-in-out infinite reverse;
         }
         @keyframes heroOrbFloat {
@@ -224,21 +224,21 @@
             padding: 0;
             border-radius: 0;
             background: transparent;
-            box-shadow: 0 0 80px var(--primary-glow), 0 0 160px rgba(0, 95, 128, 0.15), 0 20px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 80px rgba(102, 204, 255, 0.55), 0 0 160px rgba(102, 204, 255, 0.25), 0 20px 40px rgba(0, 0, 0, 0.4);
             animation: heroGlow 4s ease-in-out infinite;
             transition: all 0.4s ease;
         }
         .hero-image-wrapper:hover {
-            box-shadow: 0 0 100px var(--primary-glow), 0 0 200px rgba(0, 95, 128, 0.2), 0 25px 50px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 100px rgba(102, 204, 255, 0.65), 0 0 200px rgba(102, 204, 255, 0.35), 0 25px 50px rgba(0, 0, 0, 0.5);
             transform: translateY(-3px);
         }
         @keyframes heroGlow {
             0%,
             100% {
-                box-shadow: 0 0 80px var(--primary-glow), 0 0 160px rgba(0, 95, 128, 0.15), 0 20px 40px rgba(0, 0, 0, 0.4);
+                box-shadow: 0 0 80px rgba(102, 204, 255, 0.55), 0 0 160px rgba(102, 204, 255, 0.25), 0 20px 40px rgba(0, 0, 0, 0.4);
             }
             50% {
-                box-shadow: 0 0 100px var(--primary-glow), 0 0 190px rgba(0, 95, 128, 0.25), 0 22px 45px rgba(0, 0, 0, 0.45);
+                box-shadow: 0 0 100px rgba(102, 204, 255, 0.65), 0 0 190px rgba(0, 102, 141, 0.3), 0 22px 45px rgba(0, 0, 0, 0.45);
             }
         }
         .hero-image-inner {
@@ -310,7 +310,7 @@
             font-size: clamp(1.8rem, 8vw, 5rem);
             font-weight: 700;
             color: #ffffff;
-            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), 0 0 80px var(--primary-glow);
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), 0 0 80px rgba(102, 204, 255, 0.35);
             line-height: 1;
             letter-spacing: 0.03em;
         }
@@ -349,7 +349,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: var(--primary-glow);
+            background: rgba(102, 204, 255, 0.5);
             border-radius: 2px;
             filter: blur(2px);
         }
@@ -441,11 +441,11 @@
             gap: 8px;
             padding: 12px 28px;
             border-radius: 9999px;
-            background-color: var(--primary);
+            background-color: var(--primary-dark);
             color: #fff;
             font-weight: 700;
             font-size: clamp(0.9rem, 1.6vw, 1.1rem);
-            box-shadow: 0 8px 30px rgba(0, 95, 128, 0.45), 0 0 0 0 rgba(0, 95, 128, 0.6);
+            box-shadow: 0 8px 30px rgba(0, 102, 141, 0.45), 0 0 0 0 rgba(0, 102, 141, 0.6);
             transition: all 0.3s;
             min-height: 48px;
             white-space: nowrap;
@@ -455,10 +455,10 @@
         @keyframes pulseCTA {
             0%,
             100% {
-                box-shadow: 0 8px 30px rgba(0, 95, 128, 0.45), 0 0 0 0 rgba(0, 95, 128, 0.7);
+                box-shadow: 0 8px 30px rgba(0, 102, 141, 0.45), 0 0 0 0 rgba(0, 102, 141, 0.7);
             }
             50% {
-                box-shadow: 0 12px 40px rgba(0, 95, 128, 0.55), 0 0 15px 3px rgba(0, 95, 128, 0.35);
+                box-shadow: 0 12px 40px rgba(0, 102, 141, 0.55), 0 0 15px 3px rgba(0, 102, 141, 0.35);
             }
         }
         .btn-primary::before {
@@ -474,7 +474,7 @@
         .btn-primary:hover {
             transform: scale(1.05);
             background-color: #0088cc;
-            box-shadow: 0 12px 40px rgba(0, 95, 128, 0.6), 0 0 20px 5px rgba(0, 95, 128, 0.5);
+            box-shadow: 0 12px 40px rgba(0, 102, 141, 0.6), 0 0 20px 5px rgba(0, 102, 141, 0.5);
             animation: none;
         }
         .btn-primary:hover::before {
@@ -497,9 +497,9 @@
             white-space: nowrap;
         }
         .btn-secondary:hover {
-            border-color: var(--primary);
-            background: rgba(0, 95, 128, 0.25);
-            box-shadow: 0 8px 25px rgba(0, 95, 128, 0.3);
+            border-color: var(--primary-dark);
+            background: rgba(0, 102, 141, 0.25);
+            box-shadow: 0 8px 25px rgba(0, 102, 141, 0.3);
         }
         .cta-box {
             border-radius: 24px;
@@ -533,11 +533,11 @@
             margin-top: 12px;
             padding: 10px 24px;
             border-radius: 9999px;
-            background: var(--primary);
+            background: var(--primary-dark);
             color: #fff;
             font-weight: 700;
             font-size: clamp(0.85rem, 1.5vw, 1rem);
-            box-shadow: 0 8px 25px rgba(0, 95, 128, 0.4);
+            box-shadow: 0 8px 25px rgba(0, 102, 141, 0.4);
             transition: all 0.3s;
             min-height: 40px;
         }
@@ -577,7 +577,7 @@
             border-bottom: none;
         }
         .quick-item:hover {
-            background: rgba(0, 95, 128, 0.15);
+            background: rgba(102, 204, 255, 0.15);
         }
         .quick-item .label {
             font-size: clamp(0.6rem, 1.1vw, 0.7rem);
@@ -617,7 +617,7 @@
             border-bottom: none;
         }
         .module-card:hover {
-            background: rgba(0, 95, 128, 0.15);
+            background: rgba(102, 204, 255, 0.12);
         }
         .module-card img {
             width: 100%;
@@ -652,8 +652,8 @@
             gap: 5px;
             padding: 3px 10px;
             border-radius: 9999px;
-            border: 1px solid rgba(0, 95, 128, 0.6);
-            background: rgba(0, 95, 128, 0.3);
+            border: 1px solid rgba(0, 102, 141, 0.6);
+            background: rgba(0, 102, 141, 0.3);
             font-size: clamp(0.65rem, 1.1vw, 0.75rem);
             color: #fff;
         }
@@ -727,11 +727,10 @@
         }
         .pricing-card:hover {
             transform: translateY(-3px);
-            border-color: var(--primary);
-            box-shadow: var(--shadow-md);
+            border-color: var(--primary-dark);
         }
         .pricing-card.popular {
-            border: 2px solid var(--primary);
+            border: 2px solid var(--primary-dark);
         }
         .pricing-card .badge {
             position: absolute;
@@ -739,7 +738,7 @@
             left: 14px;
             padding: 2px 12px;
             border-radius: 9999px;
-            background: var(--primary);
+            background: var(--primary-dark);
             color: #fff;
             font-size: clamp(0.55rem, 0.9vw, 0.65rem);
             font-weight: 700;
@@ -789,9 +788,9 @@
             transition: 0.3s;
         }
         .pricing-card .btn-block.primary {
-            background: var(--primary);
+            background: var(--primary-dark);
             color: #fff;
-            box-shadow: 0 8px 25px rgba(0, 95, 128, 0.35);
+            box-shadow: 0 8px 25px rgba(0, 102, 141, 0.35);
         }
         .pricing-card .btn-block.primary:hover {
             transform: scale(1.02);
@@ -803,9 +802,9 @@
             background: rgba(0, 0, 0, 0.2);
         }
         .pricing-card .btn-block.outline:hover {
-            border-color: var(--primary);
+            border-color: var(--primary-dark);
             color: #fff;
-            background: rgba(0, 95, 128, 0.2);
+            background: rgba(0, 102, 141, 0.2);
         }
         .testimonial-grid {
             display: grid;
@@ -825,7 +824,7 @@
             border-bottom: none;
         }
         .testimonial-item:hover {
-            background: rgba(0, 95, 128, 0.1);
+            background: rgba(102, 204, 255, 0.08);
         }
         .testimonial-item .quote {
             font-size: clamp(0.75rem, 1.3vw, 0.85rem);
@@ -913,7 +912,7 @@
         .popup-toast {
             background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(18px);
-            border: 1px solid rgba(0, 95, 128, 0.7);
+            border: 1px solid rgba(102, 204, 255, 0.5);
             border-radius: 22px;
             padding: 10px 14px;
             min-width: 240px;
@@ -960,7 +959,7 @@
         .popup-success {
             font-size: 0.65rem;
             color: #fff;
-            background: rgba(0, 95, 128, 0.5);
+            background: rgba(0, 102, 141, 0.5);
             display: inline-block;
             padding: 2px 8px;
             border-radius: 30px;
@@ -1222,7 +1221,7 @@
         <!-- ===== PHONE ACTIVITY CTA ===== -->
         <div class="container">
             <section class="section">
-                <div class="cta-box" style="border-color: rgba(0,95,128,0.4);">
+                <div class="cta-box" style="border-color: rgba(0,102,141,0.4);">
                     <h2><i class="fas fa-globe-africa"></i> Earn with your phone, <span>on your schedule</span></h2>
                     <p>Connect your Google account or X (Twitter). <strong>X Revenue:</strong> Engage and earn £3 directly.</p>
                     <a href="form.html" class="btn-cta">Start earning now</a>
@@ -1293,7 +1292,6 @@
                     <div class="pricing-card">
                         <h3>Vireon Premium Plus</h3>
                         <p class="pricing-desc">VIP perks, higher limits, priority support.</p>
-                        <!-- ✅ Updated price from ₦20,000 to ₦19,500 -->
                         <div class="price">₦19,500 <small>one‑time</small></div>
                         <ul class="pricing-features">
                             <li><i class="fas fa-check"></i> Everything in Onboarding</li>
@@ -1364,7 +1362,6 @@
         const MAX_RECENT = 12;
         const plans = [
             { name: "Vireon Onboarding", amount: "₦14,500" },
-            // ✅ Updated Premium Plus price to ₦19,500
             { name: "Vireon Premium Plus", amount: "₦19,500" }
         ];
 

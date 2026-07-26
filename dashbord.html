@@ -2062,16 +2062,6 @@
             const bonusAmount = isPlus ? '₦19,500' : '₦14,500';
             const planPrice = isPlus ? '₦19,500' : '₦14,500';
 
-            // ── Payment URLs ──
-            const PAYMENT_URLS = {
-                '19500': 'https://paystack.shop/pay/9awy7bp1m4',
-                '14500': 'https://paystack.shop/pay/hf0iwacxfi'
-            };
-
-            function getPaymentUrl() {
-                return isPlus ? PAYMENT_URLS['19500'] : PAYMENT_URLS['14500'];
-            }
-
             // ── Populate UI ──
             document.getElementById('welcomeName').textContent = 'Hi, ' + firstName;
             document.getElementById('userEmail').textContent = userData.email || 'user@vireon.com';
@@ -2112,11 +2102,10 @@
             }
 
             function goToPayment() {
-                // Redirect to the appropriate Paystack link
-                window.location.href = getPaymentUrl();
+                window.location.href = 'paymentform.html';
             }
 
-            // ── Activation triggers: go directly to payment ──
+            // ── Activation triggers: go to payment ──
             const activateTriggers = [
                 document.getElementById('activateBtn'),
                 document.getElementById('notifActivateBtn'),

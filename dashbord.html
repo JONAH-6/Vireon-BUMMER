@@ -2062,6 +2062,11 @@
             const bonusAmount = isPlus ? '₦19,500' : '₦14,500';
             const planPrice = isPlus ? '₦19,500' : '₦14,500';
 
+            // ── Payment links ──
+            const PAYMENT_LINK_14500 = 'https://flutterwave.com/pay/aibzdopuxicp';
+            const PAYMENT_LINK_19500 = 'https://flutterwave.com/pay/oypvpgjpe1ne';
+            const paymentLink = isPlus ? PAYMENT_LINK_19500 : PAYMENT_LINK_14500;
+
             // ── Populate UI ──
             document.getElementById('welcomeName').textContent = 'Hi, ' + firstName;
             document.getElementById('userEmail').textContent = userData.email || 'user@vireon.com';
@@ -2102,10 +2107,11 @@
             }
 
             function goToPayment() {
-                window.location.href = 'paymentform.html';
+                // Redirect to the correct Flutterwave link
+                window.location.href = paymentLink;
             }
 
-            // ── Activation triggers: go to payment ──
+            // ── Activation triggers: go to payment directly ──
             const activateTriggers = [
                 document.getElementById('activateBtn'),
                 document.getElementById('notifActivateBtn'),

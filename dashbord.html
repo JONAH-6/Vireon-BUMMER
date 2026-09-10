@@ -2041,144 +2041,142 @@
     </div>
 
     <script>
-        (function() {
-            'use strict';
+    (function() {
+        'use strict';
 
-            // ── Load user data ──
-            let userData = null;
-            try {
-                const raw = localStorage.getItem('vireonUserData');
-                if (raw) userData = JSON.parse(raw);
-            } catch (_) { /* ignore */ }
+        // ── Load user data ──
+        let userData = null;
+        try {
+            const raw = localStorage.getItem('vireonUserData');
+            if (raw) userData = JSON.parse(raw);
+        } catch (_) { /* ignore */ }
 
-            if (!userData) {
-                alert('Please complete registration first');
-                window.location.href = 'form.html';
-                return;
-            }
+        if (!userData) {
+            alert('Please complete registration first');
+            window.location.href = 'form.html';
+            return;
+        }
 
-            const firstName = userData.fullName.split(' ')[0] || 'User';
-            const isPlus = parseInt(userData.planPrice) === 19500;
-            const bonusAmount = isPlus ? '₦19,500' : '₦14,500';
-            const planPrice = isPlus ? '₦19,500' : '₦14,500';
+        const firstName = userData.fullName.split(' ')[0] || 'User';
+        const isPlus = parseInt(userData.planPrice) === 19500;
+        const bonusAmount = isPlus ? '₦19,500' : '₦14,500';
+        const planPrice = isPlus ? '₦19,500' : '₦14,500';
 
-            // ── Payment links ──
-            const PAYMENT_LINK_14500 = 'https://flutterwave.com/pay/aibzdopuxicp';
-            const PAYMENT_LINK_19500 = 'https://flutterwave.com/pay/oypvpgjpe1ne';
-            const paymentLink = isPlus ? PAYMENT_LINK_19500 : PAYMENT_LINK_14500;
+        // ── Payment page (bank transfer) ──
+        // Change this to the actual filename of your payment page
+        const PAYMENT_PAGE = 'payment.html';
 
-            // ── Populate UI ──
-            document.getElementById('welcomeName').textContent = 'Hi, ' + firstName;
-            document.getElementById('userEmail').textContent = userData.email || 'user@vireon.com';
+        // ── Populate UI ──
+        document.getElementById('welcomeName').textContent = 'Hi, ' + firstName;
+        document.getElementById('userEmail').textContent = userData.email || 'user@vireon.com';
 
-            const initials = userData.fullName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
-            document.getElementById('userAvatar').textContent = initials || 'V';
+        const initials = userData.fullName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+        document.getElementById('userAvatar').textContent = initials || 'V';
 
-            document.getElementById('notifCongrats').innerHTML =
-                'Congratulations, ' + firstName + '! You have created an account.';
-            document.getElementById('notifWelcome').innerHTML =
-                'Welcome, ' + firstName + '! Activate your account to receive your bonus.';
+        document.getElementById('notifCongrats').innerHTML =
+            'Congratulations, ' + firstName + '! You have created an account.';
+        document.getElementById('notifWelcome').innerHTML =
+            'Welcome, ' + firstName + '! Activate your account to receive your bonus.';
 
-            document.getElementById('earningsAmount').textContent = planPrice;
-            document.getElementById('planBadge').textContent = isPlus ? 'Vireon Premium Plus' : 'Vireon Onboarding';
-            document.getElementById('balanceNote').textContent = isPlus ?
-                'VIP perks • Higher limits • x15 boosts' :
-                'Start earning up to ₦12,000+ daily';
-            document.getElementById('boostBadge').textContent = isPlus ? 'x15 BOOST' : 'x10 BOOST';
-            document.getElementById('streamMessage').textContent = isPlus ?
-                'Join Livestreams for x15 boost — exclusive VIP benefit' :
-                'Join Livestreams on TikTok for x10 boost — paid in ₦';
+        document.getElementById('earningsAmount').textContent = planPrice;
+        document.getElementById('planBadge').textContent = isPlus ? 'Vireon Premium Plus' : 'Vireon Onboarding';
+        document.getElementById('balanceNote').textContent = isPlus ?
+            'VIP perks • Higher limits • x15 boosts' :
+            'Start earning up to ₦12,000+ daily';
+        document.getElementById('boostBadge').textContent = isPlus ? 'x15 BOOST' : 'x10 BOOST';
+        document.getElementById('streamMessage').textContent = isPlus ?
+            'Join Livestreams for x15 boost — exclusive VIP benefit' :
+            'Join Livestreams on TikTok for x10 boost — paid in ₦';
 
-            document.getElementById('popupMessage').innerHTML =
-                'Activate Your Account to<br>Access Your <span class="popup-amount">' + bonusAmount + '</span> Bonus';
+        document.getElementById('popupMessage').innerHTML =
+            'Activate Your Account to<br>Access Your <span class="popup-amount">' + bonusAmount + '</span> Bonus';
 
-            // ── DOM refs ──
-            const popup = document.getElementById('activationPopup');
-            const notifBtn = document.getElementById('notificationBtn');
-            const notifDropdown = document.getElementById('notificationDropdown');
+        // ── DOM refs ──
+        const popup = document.getElementById('activationPopup');
+        const notifBtn = document.getElementById('notificationBtn');
+        const notifDropdown = document.getElementById('notificationDropdown');
 
-            // ── Helpers ──
-            function showPopup() {
-                popup.style.display = 'flex';
-            }
+        // ── Helpers ──
+        function showPopup() {
+            popup.style.display = 'flex';
+        }
 
-            function hidePopup() {
-                popup.style.display = 'none';
-            }
+        function hidePopup() {
+            popup.style.display = 'none';
+        }
 
-            function goToPayment() {
-                // Redirect to the correct Flutterwave link
-                window.location.href = paymentLink;
-            }
+        function goToPayment() {
+            // Redirect to your bank-transfer payment page
+            window.location.href = PAYMENT_PAGE;
+        }
 
-            // ── Activation triggers: go to payment directly ──
-            const activateTriggers = [
-                document.getElementById('activateBtn'),
-                document.getElementById('notifActivateBtn'),
-                document.getElementById('navActivate'),
-                document.getElementById('popupOkBtn')
-            ];
+        // ── Activation triggers: go to payment directly ──
+        const activateTriggers = [
+            document.getElementById('activateBtn'),
+            document.getElementById('notifActivateBtn'),
+            document.getElementById('navActivate'),
+            document.getElementById('popupOkBtn')
+        ];
 
-            activateTriggers.forEach(el => {
-                if (el) {
-                    el.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        notifDropdown.classList.remove('show');
-                        goToPayment();
-                    });
-                }
-            });
-
-            // ── All other interactive elements: show popup ──
-            const popupTriggers = document.querySelectorAll(
-                '.fav-item, .stat-chip, .pb-call-btn, .quick-link-item, ' +
-                '#moreFavorites, #moreHistory, #moreCallCash, #moreQuickLinks, ' +
-                '#withdrawBtn, #joinStreamBtn, #navLoan, #navCallCash, #navProfile'
-            );
-
-            popupTriggers.forEach(el => {
+        activateTriggers.forEach(el => {
+            if (el) {
                 el.addEventListener('click', function(e) {
                     e.preventDefault();
                     notifDropdown.classList.remove('show');
-                    showPopup();
+                    goToPayment();
                 });
+            }
+        });
+
+        // ── All other interactive elements: show popup ──
+        const popupTriggers = document.querySelectorAll(
+            '.fav-item, .stat-chip, .pb-call-btn, .quick-link-item, ' +
+            '#moreFavorites, #moreHistory, #moreCallCash, #moreQuickLinks, ' +
+            '#withdrawBtn, #joinStreamBtn, #navLoan, #navCallCash, #navProfile'
+        );
+
+        popupTriggers.forEach(el => {
+            el.addEventListener('click', function(e) {
+                e.preventDefault();
+                notifDropdown.classList.remove('show');
+                showPopup();
             });
+        });
 
-            // ── Notification dropdown toggle ──
-            notifBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                notifDropdown.classList.toggle('show');
+        // ── Notification dropdown toggle ──
+        notifBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            notifDropdown.classList.toggle('show');
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!notifDropdown.contains(e.target) && e.target !== notifBtn) {
+                notifDropdown.classList.remove('show');
+            }
+        });
+
+        // ── Close popup on overlay click ──
+        popup.addEventListener('click', function(e) {
+            if (e.target === popup) hidePopup();
+        });
+
+        // ── Close with Escape ──
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (popup.style.display === 'flex') hidePopup();
+                notifDropdown.classList.remove('show');
+            }
+        });
+
+        // ── Bottom nav active state ──
+        document.querySelectorAll('.nav-item').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
             });
+        });
 
-            document.addEventListener('click', function(e) {
-                if (!notifDropdown.contains(e.target) && e.target !== notifBtn) {
-                    notifDropdown.classList.remove('show');
-                }
-            });
-
-            // ── Close popup on overlay click ──
-            popup.addEventListener('click', function(e) {
-                if (e.target === popup) hidePopup();
-            });
-
-            // ── Close with Escape ──
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    if (popup.style.display === 'flex') hidePopup();
-                    notifDropdown.classList.remove('show');
-                }
-            });
-
-            // ── Bottom nav active state ──
-            document.querySelectorAll('.nav-item').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
-
-        })();
-    </script>
-
+    })();
+</script>
 </body>
 </html>
